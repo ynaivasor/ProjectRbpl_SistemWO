@@ -203,7 +203,7 @@
       <div class="paket-card">
         <div class="card-label">ALL IN</div>
     
-        <img src="YOUR_IMAGE_PATH_HERE" alt="Paket ALL IN" class="card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+        <img src="../assets/allin.jpg" alt="Paket ALL IN" class="card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
         <div class="card-img-placeholder" style="display:none;">Foto Paket ALL IN</div>
         <div class="card-actions">
           <a href="allin.php" class="card-action-btn">
@@ -220,7 +220,7 @@
       <!-- Card Premium -->
       <div class="paket-card">
         <div class="card-label">Premium</div>
-        <img src="YOUR_IMAGE_PATH_HERE" alt="Paket Premium" class="card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+        <img src="../assets/premium.jpg" alt="Paket Premium" class="card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
         <div class="card-img-placeholder" style="display:none;">Foto Paket Premium</div>
         <div class="card-actions">
           <a href="premium.php" class="card-action-btn">
@@ -237,7 +237,7 @@
       <!-- Card Hemat -->
       <div class="paket-card">
         <div class="card-label">Hemat</div>
-        <img src="YOUR_IMAGE_PATH_HERE" alt="Paket Hemat" class="card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+        <img src="../assets/hemat.jpg" alt="Paket Hemat" class="card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
         <div class="card-img-placeholder" style="display:none;">Foto Paket Hemat</div>
         <div class="card-actions">
           <a href="hemat.php" class="card-action-btn">

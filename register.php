@@ -219,7 +219,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="page-wrapper">
 
   <div class="left-col">
-    <img src="YOUR_IMAGE_PATH_HERE" alt="Praha Agency" />
+    <img src="assets/logreg.jpg" alt="Praha Agency" />
     <svg class="left-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 900" preserveAspectRatio="none">
       <path
         d="M0,0 C30,150 60,300 30,450 C60,600 30,750 0,900 L80,900 L80,0 Z"

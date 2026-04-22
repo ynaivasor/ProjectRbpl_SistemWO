@@ -223,7 +223,7 @@ $contact = $data['contact_person'];
       </div>
 
       <div class="photo-col">
-        <img src="YOUR_IMAGE_PATH_HERE" alt="Foto Paket"
+        <img src="../assets/hemat.jpg" alt="Foto Paket"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
         <div class="photo-placeholder" style="display:none;">Foto Paket</div>
       </div>
