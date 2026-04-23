@@ -29,10 +29,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         } 
         elseif ($data['role_name'] == "owner" || $data['role_name'] == "staff_wo") {
-            header("Location: dashboard_admin.php");
+            header("Location: admin/dashboardAdmin.php");
+            exit();
         } 
         elseif ($data['role_name'] == "vendor") {
-            header("Location: dashboard_vendor.php");
+            header("Location: vendor/dashboardVendor.php");
+            exit();
         } 
         else {
             echo "Role tidak dikenali.";

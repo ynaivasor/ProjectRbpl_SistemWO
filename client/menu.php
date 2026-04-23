@@ -1,3 +1,9 @@
+<?php
+session_start();
+include '../koneksi.php';
+
+$idUser = $_SESSION['id_user'];
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -185,7 +191,7 @@
     <a href="#" class="navbar-brand-text">Praha Agency</a>
     <ul class="navbar-links">
       <li><a href="dashboard_transaksi.php">Transaksi</a></li>
-      <li><a href="bukurantaman.php">Buku Rantaman</a></li>
+      <li><a href="rantamanUser.php">Buku Rantaman</a></li>
       <li><a href="login.php">Log Out</a></li>
     </ul>
   </nav>
