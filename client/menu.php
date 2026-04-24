@@ -2,8 +2,9 @@
 session_start();
 include '../koneksi.php';
 
-$idUser = $_SESSION['id_user'];
+$idUser = $_SESSION['id_users'];
 ?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>

@@ -3,12 +3,12 @@ session_start();
 include '../koneksi.php';
 
 // ambil id user dari session
-$id_user = $_SESSION['id_user'];
+$id_users = $_SESSION['id_users'];
 
 // query data milik user
 $query = mysqli_query($conn, "
     SELECT * FROM bukuRantaman 
-    WHERE idUser = '$id_user'
+    WHERE idUser = '$id_users'
 ");
 
 $data = mysqli_fetch_assoc($query);
