@@ -22,6 +22,25 @@ if (!$data) {
     exit;
 }
 
+// 🔴 tombol "Selesaikan Event"
+if (isset($_POST['selesaikan_event'])) {
+
+    $stmt = $conn->prepare("
+        UPDATE bukuRantaman 
+        SET status = 'done'
+        WHERE idBukuRantaman = ?
+    ");
+
+    $stmt->bind_param("i", $id);
+
+    if ($stmt->execute()) {
+        header("Location: listBukuRantaman.php");
+        exit;
+    } else {
+        echo "Gagal menyelesaikan event!";
+    }
+}
+
 if (isset($_POST['simpan_perubahan'])) {
 
     $namaPria = $_POST['namaPengantinPria'];
@@ -458,9 +477,10 @@ if (isset($_POST['simpan_perubahan'])) {
         </button>
       </div>
             <div class="btn-submit-wrap">
-        <button type="submit" name="simpan_perubahan" class="btn-submit">
-          Selesaikan Event
-        </button>
+   <button type="submit" name="selesaikan_event" class="btn-submit">
+    Selesaikan Event
+  </button>
+</div>
       </div>
 
     </form>

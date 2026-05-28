@@ -2,7 +2,11 @@
 session_start();
 include '../koneksi.php';
 
-$query = mysqli_query($conn, "SELECT * FROM bukuRantaman WHERE status = 'done'");
+$query = mysqli_query($conn, "
+    SELECT perubahan.*, users.username 
+    FROM perubahan
+    JOIN users ON perubahan.id_user = users.id_users
+");
 $events = [];
 
 while ($row = mysqli_fetch_assoc($query)) {
@@ -15,7 +19,7 @@ while ($row = mysqli_fetch_assoc($query)) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Praha Agency – Event On Going</title>
+  <title>Praha Agency – Perubahan</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -284,48 +288,55 @@ while ($row = mysqli_fetch_assoc($query)) {
 <!-- PAGE HEADER -->
 <div class="page-header">
   <a href="#" class="btn-back">&#8249;</a>
-  <h1 class="page-title">Event On Going</h1>
+  <h1 class="page-title">Perubahan dari user</h1>
 </div>
 
 <main>
 
   <div class="event-meta">
-    <span class="event-count">Menampilkan <strong><?= count($events); ?></strong> event</span>
-    <span class="badge-ongoing">● On Going</span>
+    <span class="event-count">Menampilkan <strong><?= count($events); ?></strong> perubahan</span>
   </div>
 
   <!-- Event List -->
-  <div class="event-list">
+     <div class="event-list">
+<?php foreach ($events as $event): ?>
 
-  <?php foreach ($events as $event): ?>
 <div class="event-card">
-  <div class="event-info">
-    <p class="event-title">
-      Mr. <?= htmlspecialchars($event['namaPengantinPria']); ?>
-      &amp;
-      Mrs. <?= htmlspecialchars($event['namaPengantinWanita']); ?> Wedding
-    </p>
 
-    <div class="event-meta-row">
-      <span class="event-meta-item">
-        📅 <?= htmlspecialchars($event['tanggalPelaksanaan']); ?>
-      </span>
-      <span class="event-meta-item">
-        📍 <?= htmlspecialchars($event['lokasi']); ?>
-      </span>
+    <div class="event-info">
+
+        <p class="event-title">
+            Request perubahan dari:
+            <?= htmlspecialchars($event['username']); ?>
+        </p>
+
+        <div class="event-meta-row">
+            <span class="event-meta-item">
+                📝 <?= htmlspecialchars($event['detail_revisi']); ?>
+            </span>
+        </div>
+
     </div>
-  </div>
 
-  <div class="event-actions">
-    <a href="detailBuku.php?id=<?= $event['idBukuRantaman']; ?>" class="btn-action btn-lihat">
-      Lihat Buku
-    </a>
-    <a href="editBuku.php?id=<?= $event['idBukuRantaman']; ?>" class="btn-action btn-edit">
-      Edit
-    </a>
-  </div>
+    <div class="event-actions">
+
+        <a href="perubahan.php?id=<?= $event['id_perubahan']; ?>" 
+           class="btn-action btn-lihat">
+            Lihat Detail
+        </a>
+
+        <a href="editBuku.php?id=<?= $event['id_user']; ?>" 
+           class="btn-action btn-edit">
+            Buku Rantaman
+        </a>
+
+    </div>
+
 </div>
+
 <?php endforeach; ?>
+
+</div>
     </div>
 
    <?php if (empty($events)): ?>

@@ -1,59 +1,40 @@
 <?php
-session_start();
 include '../koneksi.php';
 
-$id_users = $_SESSION['id_users'];
+$id = $_GET['id'] ?? null;
 
-$message = "";
-$type = "";
+if (!$id) {
+    echo "ID tidak ditemukan!";
+    exit;
+}
 
-if (isset($_POST['kirim_perubahan'])) {
+$query = mysqli_query($conn, "
+    SELECT * FROM perubahan 
+    WHERE id_perubahan = '$id'
+");
 
-    $komponen = $_POST['komponen'];
-    $detail = $_POST['detail_revisi'];
-    $id_user = $_SESSION['id_users'];
+$data = mysqli_fetch_assoc($query);
 
-    $filePath = null;
+if (!$data) {
+    echo "Data tidak ditemukan!";
+    exit;
+}
 
-    // upload file
-    if (!empty($_FILES['file_pendukung']['name'])) {
+if (isset($_POST['hapus_perubahan'])) {
 
-        $file = $_FILES['file_pendukung'];
-        $namaFile = $file['name'];
-        $tmpFile = $file['tmp_name'];
-
-        $ext = strtolower(pathinfo($namaFile, PATHINFO_EXTENSION));
-
-        $allowed = ['pdf','jpg','jpeg','png','doc','docx'];
-
-        if (in_array($ext, $allowed)) {
-
-            $namaBaru = time() . '_' . $namaFile;
-            $path = "uploads/perubahan/" . $namaBaru;
-
-            if (move_uploaded_file($tmpFile, $path)) {
-                $filePath = $namaBaru;
-            }
-        }
-    }
-
-    // insert database
-    $stmt = $conn->prepare("
-        INSERT INTO perubahan 
-        (id_user, komponen, detail_revisi, file_pendukung)
-        VALUES (?, ?, ?, ?)
+    $hapus = mysqli_query($conn, "
+        DELETE FROM perubahan
+        WHERE id_perubahan = '$id'
     ");
 
-    $stmt->bind_param("isss", $id_user, $komponen, $detail, $filePath);
-
-    if ($stmt->execute()) {
-        $message = "Data berhasil disimpan!";
-        $type = "success";
+    if ($hapus) {
+        header("Location: listperubahan.php");
+        exit;
     } else {
-        $message = "Gagal menyimpan data!";
-        $type = "error";
+        echo "Gagal menghapus perubahan!";
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -289,14 +270,6 @@ if (isset($_POST['kirim_perubahan'])) {
     <a href="logout.php" class="nav-logout">Log Out</a>
   </div>
 </nav>
- <?php if ($message != ""): ?>
-        <div class="alert <?= $type ?>">
-            <?= $message ?>
-        </div>
-    <?php endif; ?>
-
-
-
 <!-- PAGE TITLE -->
 <div class="page-title-wrap">
   <h1>Masukkan Perubahan</h1>
@@ -305,54 +278,57 @@ if (isset($_POST['kirim_perubahan'])) {
 <!-- MAIN -->
 <main>
   <div class="card">
-    <form method="POST" action="laporPerubahan.php" enctype="multipart/form-data"
+    <form method="POST" action="perubahan.php?id=<?= $id; ?> enctype="multipart/form-data"
           style="display:flex; flex-direction:column; gap:1.4rem;">
-
-      <!-- Komponen yang ingin diubah -->
-      <div class="form-group">
-        <label for="komponen">Komponen yang ingin diubah</label>
-        <input
-          type="text"
-          id="komponen"
-          name="komponen"
-          placeholder=""
-        />
-      </div>
-
+<div class="form-group">
+  <label for="komponen">Komponen yang ingin diubah</label>
+  <input
+    type="text"
+    id="komponen"
+    name="komponen"
+    value="<?= htmlspecialchars($data['komponen']); ?>"
+    readonly
+  />
+</div>
       <!-- Jelaskan detail revisi -->
-      <div class="form-group">
-        <label for="detail_revisi">Jelaskan detail revisi</label>
-        <textarea
-          id="detail_revisi"
-          name="detail_revisi"
-          class="detail"
-        ></textarea>
-      </div>
+    <!-- Jelaskan detail revisi -->
+<div class="form-group">
+  <label for="detail_revisi">Jelaskan detail revisi</label>
+
+  <textarea
+    id="detail_revisi"
+    name="detail_revisi"
+    class="detail"
+    readonly
+  ><?= htmlspecialchars($data['detail_revisi']); ?></textarea>
+
+</div>
 
       <!-- File pendukung (Opsional) -->
       <div class="form-group">
         <label>File pendukung (Opsional)</label>
         <div class="file-upload-box">
-          <input
-            type="file"
-            id="file_pendukung"
-            name="file_pendukung"
-            accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-            onchange="showFileName(this)"
-          />
-          <span class="upload-icon">
-            <svg viewBox="0 0 24 24"><path d="M19.35 10.04A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 0 0 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
-          </span>
-          <p class="upload-hint">Klik untuk upload file</p>
-          <p id="file-name"></p>
-        </div>
+        <?php if (!empty($data['file_pendukung'])): ?>
+
+<div class="form-group">
+  <label>File Pendukung</label>
+
+  <a 
+    href="../uploads/perubahan/<?= $data['file_pendukung']; ?>" 
+    target="_blank"
+    class="btn-submit"
+    style="text-decoration:none; text-align:center;"
+  >
+    Lihat File
+  </a>
+</div>
+
+<?php endif; ?>
       </div>
 
       <!-- Submit -->
       <div class="btn-submit-wrap">
-        <button type="submit" name="kirim_perubahan" class="btn-submit">
-          Kirim Perubahan
-        </button>
+        <button type="submit" name="hapus_perubahan" class="btn-submit">Selesaikan Perubahan</button>
       </div>
 
     </form>

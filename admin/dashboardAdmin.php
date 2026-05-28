@@ -226,10 +226,9 @@ $username = $_SESSION['username'];
       </a>
 
       <!-- Kirim Briefing Rancangan ke Vendor -->
-      <a href="" class="menu-card">
-        <span class="menu-title">Kirim Briefing Rancangan ke Vendor</span>
+      <a href="../admin/listperubahan.php" class="menu-card">
+        <span class="menu-title">Lihat Briefing Perubahan</span>
         <span class="menu-icon">
-          <!-- send / paper plane icon -->
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
           </svg>
