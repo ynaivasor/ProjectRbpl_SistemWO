@@ -217,7 +217,7 @@ $idUser = $_SESSION['id_users'];
             <span>Lihat Detail</span>
             <span class="chevron">&#8250;</span>
           </a>
-          <a href="payment.php?paket=allin" class="card-action-btn booking">
+          <a href="booking.php?paket=allin" class="card-action-btn booking">
             <span>Booking sekarang</span>
             <span class="chevron">&#8250;</span>
           </a>
@@ -234,7 +234,7 @@ $idUser = $_SESSION['id_users'];
             <span>Lihat Detail</span>
             <span class="chevron">&#8250;</span>
           </a>
-          <a href="payment.php?paket=premium" class="card-action-btn booking">
+          <a href="booking.php?paket=premium" class="card-action-btn booking">
             <span>Booking sekarang</span>
             <span class="chevron">&#8250;</span>
           </a>
@@ -251,7 +251,7 @@ $idUser = $_SESSION['id_users'];
             <span>Lihat Detail</span>
             <span class="chevron">&#8250;</span>
           </a>
-          <a href="payment.php?paket=hemat" class="card-action-btn booking">
+          <a href="booking.php?paket=hemat" class="card-action-btn booking">
             <span>Booking sekarang</span>
             <span class="chevron">&#8250;</span>
           </a>

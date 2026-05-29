@@ -2,8 +2,9 @@
 session_start();
 include '../koneksi.php';
 
-$query = mysqli_query($conn, "SELECT * FROM bukuRantaman WHERE status = 'done'");
-$events = [];
+// SEBELUMNYA: status = 'done'
+// REVISI: Ubah menjadi 'on going' agar sesuai dengan input dari booking.php
+$query = mysqli_query($conn, "SELECT * FROM bukuRantaman WHERE status = 'ongoing'");$events = [];
 
 while ($row = mysqli_fetch_assoc($query)) {
     $events[] = $row;
@@ -291,7 +292,7 @@ while ($row = mysqli_fetch_assoc($query)) {
 
   <div class="event-meta">
     <span class="event-count">Menampilkan <strong><?= count($events); ?></strong> event</span>
-    <span class="badge-ongoing">● On Going</span>
+    <span class="badge-ongoing">● On Going</span> 
   </div>
 
   <!-- Event List -->
