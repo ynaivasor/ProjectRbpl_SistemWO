@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['selesaikan'])) {
     }
 }
 
-$qrisPath = '../assets/img/qris.png';
+$qrisPath = '../assets/qris.png';
 ?>
 
 <!DOCTYPE html>
